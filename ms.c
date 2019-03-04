@@ -275,7 +275,8 @@ int main(int argc, char **argv)
       }
       else
         printf("press any key...\n");
-      getch();
+      if( getch() == 0x1b ) {getch();getch();}
+      printf("\033[?25h");
       break;
     }
 
@@ -326,7 +327,10 @@ int main(int argc, char **argv)
                   }
                 }
                 break;
-      case 'q': exit(EXIT_SUCCESS); break;
+      case 'q':
+                printf("\033[?25h");
+                exit(EXIT_SUCCESS);
+                break;
       default:
                 if( first )
                   firstArrangement(&first, cursorX, cursorY, &t);
